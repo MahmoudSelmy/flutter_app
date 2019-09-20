@@ -36,11 +36,68 @@ class _HomePageState extends State<HomePage> {
               accountName: Text('Mahmoud Selmy'),
               accountEmail: Text('mahmoudselmy06@gmail.com'),
               currentAccountPicture: GestureDetector(
-                  child: new CircleAvatar(backgroundColor: Colors.grey,
-                    child: Icon(Icons.person, color: Colors.white,)
-              )
+                  child: new CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,)
+                  )
               ),
-            )
+              decoration: new BoxDecoration(
+                color: Colors.red
+              ),
+            ),
+            // Body
+            InkWell(
+              onTap: (){},
+              child: ListTile(
+                title: Text('Home Page'),
+                leading: Icon(Icons.home),
+              ),
+            ),
+            InkWell(
+              onTap: (){},
+              child: ListTile(
+                title: Text('My Account'),
+                leading: Icon(Icons.person),
+              ),
+            ),
+            InkWell(
+              onTap: (){},
+              child: ListTile(
+                title: Text('My Orders'),
+                leading: Icon(Icons.shopping_basket),
+              ),
+            ),
+            InkWell(
+              onTap: (){},
+              child: ListTile(
+                title: Text('Categoris'),
+                leading: Icon(Icons.dashboard),
+              ),
+            ),
+            InkWell(
+              onTap: (){},
+              child: ListTile(
+                title: Text('Favorite'),
+                leading: Icon(Icons.favorite),
+              ),
+            ),
+            Divider(),
+            InkWell(
+              onTap: (){},
+              child: ListTile(
+                title: Text('Settings'),
+                leading: Icon(Icons.settings, color: Colors.blue,),
+              ),
+            ),
+            InkWell(
+              onTap: (){},
+              child: ListTile(
+                title: Text('Help'),
+                leading: Icon(Icons.help, color: Colors.green,),
+              ),
+            ),
           ],
         ),
       ),
