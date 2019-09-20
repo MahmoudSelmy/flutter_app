@@ -16,7 +16,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    Widget image_carousel = Container(
+    return Scaffold(
+      appBar: buildAppBar(),
+      drawer: buildDrawer(),
+      body: buildBody(),
+    );
+  }
+
+  ListView buildBody() {
+    Widget imageCarousel = buildImageCarousel();
+    return ListView(
+      children: <Widget>[
+        imageCarousel,
+      ],
+    );
+  }
+
+  Widget buildImageCarousel() {
+    Widget imageCarousel = Container(
       height: 200.0,
       child: Carousel(
         // Match Parent Size
@@ -33,15 +50,7 @@ class _HomePageState extends State<HomePage> {
         indicatorBgPadding: 2.0,
       ),
     );
-    return Scaffold(
-      appBar: buildAppBar(),
-      drawer: buildDrawer(),
-      body: ListView(
-        children: <Widget>[
-          image_carousel,
-        ],
-      ),
-    );
+    return imageCarousel;
   }
 
   Drawer buildDrawer() {
