@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:carousel_pro/carousel_pro.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -15,9 +16,31 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    Widget image_carousel = Container(
+      height: 200.0,
+      child: Carousel(
+        // Match Parent Size
+        boxFit: BoxFit.cover,
+        images: [
+          AssetImage('images/m1.jpeg'),
+          AssetImage('images/m2.jpg'),
+        ],
+        autoplay: false,
+        animationCurve: Curves.fastOutSlowIn,
+        animationDuration: Duration(milliseconds: 1000),
+        dotSize: 4.0,
+        dotColor: Colors.red,
+        indicatorBgPadding: 2.0,
+      ),
+    );
     return Scaffold(
       appBar: buildAppBar(),
       drawer: buildDrawer(),
+      body: ListView(
+        children: <Widget>[
+          image_carousel,
+        ],
+      ),
     );
   }
 
@@ -75,6 +98,7 @@ class _HomePageState extends State<HomePage> {
 
   AppBar buildAppBar() {
     return new AppBar(
+      elevation: 0.1,
       backgroundColor: Colors.red,
       title: Text('Fashapp'),
       actions: <Widget>[
