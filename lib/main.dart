@@ -33,7 +33,9 @@ class _HomePageState extends State<HomePage> {
         child: Text('Categories'),),
         // Horizontal List View
         HorizontalList(),
+
       ],
+
     );
   }
 
