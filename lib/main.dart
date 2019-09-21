@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter_app/components/horizontal_list_view.dart';
 import 'package:flutter_app/components/products.dart';
+import 'package:flutter_app/pages/cart.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -30,18 +31,21 @@ class _HomePageState extends State<HomePage> {
     return ListView(
       children: <Widget>[
         imageCarousel,
-        Padding(padding: const EdgeInsets.all(8.0),
-        child: Text('Categories'),),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('Categories'),
+        ),
         // Horizontal List View
         HorizontalList(),
-        Padding(padding: const EdgeInsets.all(20.0),
-          child: Text('Recent Products'),),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text('Recent Products'),
+        ),
         Container(
           height: 320.0,
           child: Products(),
         )
       ],
-
     );
   }
 
@@ -81,41 +85,45 @@ class _HomePageState extends State<HomePage> {
         buildInkWell('Home Page', Icons.home),
         buildInkWell('My Account', Icons.person),
         buildInkWell('My Orders', Icons.shopping_basket),
-        buildInkWell('Shopping Cart', Icons.shopping_cart),
+        buildInkWell('Shopping Cart', Icons.shopping_cart, onPress: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Cart()));
+        }),
         buildInkWell('Favorites', Icons.favorite),
         Divider(),
-        buildInkWell('Settings', Icons.settings, color:Colors.blue),
-        buildInkWell('Help', Icons.help, color:Colors.green),
+        buildInkWell('Settings', Icons.settings, color: Colors.blue),
+        buildInkWell('Help', Icons.help, color: Colors.green),
       ],
     );
   }
 
-  InkWell buildInkWell(String title, IconData iconData, {Color color = Colors.red}) {
+  InkWell buildInkWell(String title, IconData iconData,
+      {Color color = Colors.red, Function onPress}) {
     return InkWell(
-          onTap: (){},
-          child: ListTile(
-            title: Text(title),
-            leading: Icon(iconData, color: color,),
-          ),
-        );
+      onTap: onPress,
+      child: ListTile(
+        title: Text(title),
+        leading: Icon(
+          iconData,
+          color: color,
+        ),
+      ),
+    );
   }
 
   UserAccountsDrawerHeader buildUserAccountsDrawerHeader() {
     return new UserAccountsDrawerHeader(
-          accountName: Text('Mahmoud Selmy'),
-          accountEmail: Text('mahmoudselmy06@gmail.com'),
-          currentAccountPicture: GestureDetector(
-              child: new CircleAvatar(
-                  backgroundColor: Colors.grey,
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.white,)
-              )
-          ),
-          decoration: new BoxDecoration(
-            color: Colors.red
-          ),
-        );
+      accountName: Text('Mahmoud Selmy'),
+      accountEmail: Text('mahmoudselmy06@gmail.com'),
+      currentAccountPicture: GestureDetector(
+          child: new CircleAvatar(
+              backgroundColor: Colors.grey,
+              child: Icon(
+                Icons.person,
+                color: Colors.white,
+              ))),
+      decoration: new BoxDecoration(color: Colors.red),
+    );
   }
 
   AppBar buildAppBar() {
@@ -132,7 +140,13 @@ class _HomePageState extends State<HomePage> {
 
   IconButton buildIconButton(IconData icon, Color color) {
     return new IconButton(
-          icon: new Icon(icon, color: color,),
-          onPressed: () {});
+        icon: new Icon(
+          icon,
+          color: color,
+        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Cart()));
+        });
   }
 }
