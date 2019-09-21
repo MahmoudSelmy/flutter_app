@@ -67,7 +67,8 @@ class SingleProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Hero(
-        tag: name,
+        // Hero's tag must bre unique
+        tag: Text(name),
         child: Material(
           child: InkWell(
             onTap: () => Navigator.of(context).push(

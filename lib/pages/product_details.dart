@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/main.dart';
+import 'package:flutter_app/components/products.dart';
 
 class ProductDetails extends StatefulWidget {
   final String name;
@@ -95,6 +97,12 @@ class _ProductDetailsState extends State<ProductDetails> {
           buildSpecsRow('Product name', 'Blazer'),
           buildSpecsRow('Product brand', 'X'),
           buildSpecsRow('Product condition', 'NEW'),
+          Divider(),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+              child: Text('Similar products'),
+          ),
+          Container(height: 360.0, child: SimilarProducts())
         ],
       ),
     );
@@ -102,18 +110,17 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   Row buildSpecsRow(String spec, String value) {
     return Row(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
-              child:
-                  Text(spec, style: TextStyle(color: Colors.grey)),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Text(value),
-            )
-          ],
-        );
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.fromLTRB(12.0, 5.0, 5.0, 5.0),
+          child: Text(spec, style: TextStyle(color: Colors.grey)),
+        ),
+        Padding(
+          padding: EdgeInsets.all(5.0),
+          child: Text(value),
+        )
+      ],
+    );
   }
 
   Expanded buildExpandedButton(String text, IconData icon, {Function onClose}) {
@@ -169,7 +176,12 @@ class _ProductDetailsState extends State<ProductDetails> {
     return new AppBar(
       elevation: 0.1,
       backgroundColor: Colors.red,
-      title: Text('Fashapp'),
+      title: InkWell(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          },
+          child: Text(widget.name)),
       actions: <Widget>[
         buildIconButton(Icons.search, Colors.white),
         buildIconButton(Icons.shopping_cart, Colors.white)
@@ -184,5 +196,17 @@ class _ProductDetailsState extends State<ProductDetails> {
           color: color,
         ),
         onPressed: () {});
+  }
+}
+
+class SimilarProducts extends StatefulWidget {
+  @override
+  _SimilarProductsState createState() => _SimilarProductsState();
+}
+
+class _SimilarProductsState extends State<SimilarProducts> {
+  @override
+  Widget build(BuildContext context) {
+    return Products().createState().build(context);
   }
 }

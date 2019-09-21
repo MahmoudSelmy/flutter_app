@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
         buildInkWell('Home Page', Icons.home),
         buildInkWell('My Account', Icons.person),
         buildInkWell('My Orders', Icons.shopping_basket),
-        buildInkWell('Categories', Icons.dashboard),
+        buildInkWell('Shopping Cart', Icons.shopping_cart),
         buildInkWell('Favorites', Icons.favorite),
         Divider(),
         buildInkWell('Settings', Icons.settings, color:Colors.blue),
