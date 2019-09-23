@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/pages/sign_up.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -98,8 +99,7 @@ class _LoginState extends State<Login> {
         await preferences.setString('photoUrl', documents[0]['profilePicture']);
       }
       Fluttertoast.showToast(msg: 'Logged In.');
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
       setState(() {
         loading = false;
       });
@@ -149,10 +149,29 @@ class _LoginState extends State<Login> {
                     Expanded(
                       child: Container(),
                     ),
-                    buildInputEntry(Icons.mail, 'Email', validateMail, _email),
-                    buildInputEntry(Icons.keyboard_hide, 'Password',
-                        validatePassword, _password),
+                    buildInputEntry(Icons.email, 'Email', validateMail, _email),
+                    buildInputEntry(Icons.lock, 'Password', validatePassword, _password),
                     buildLogButton('LogIn', (){}),
+                    Divider(),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16.0),
+                          children: [
+                            TextSpan(
+                              text: 'Don\'t have an account? click here to'
+                            ),
+                            TextSpan(
+                              text: 'sign up!',
+                              style: TextStyle(color: Colors.red)
+                            )
+                          ]
+                        ),
+                      ),
+                    ),
                     buildLogButton('Google', handleSignIn),
                   ],
                 ),
