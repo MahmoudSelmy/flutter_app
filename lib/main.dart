@@ -26,9 +26,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  ListView buildBody() {
+  Column buildBody() {
     Widget imageCarousel = buildImageCarousel();
-    return ListView(
+    return Column(
       children: <Widget>[
         imageCarousel,
         Padding(
@@ -41,8 +41,8 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(20.0),
           child: Text('Recent Products'),
         ),
-        Container(
-          height: 320.0,
+        Flexible(
+          // height: 320.0,
           child: Products(),
         )
       ],
