@@ -64,6 +64,8 @@ flutter:
     - images/products/dress1.jpeg
     - images/products/hills1.jpeg
     - images/products/hills2.jpeg
+    - images/main.jpeg
+    - images/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
