@@ -9,8 +9,7 @@ class SignUp extends StatefulWidget {
   _SignUpState createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp>
-{
+class _SignUpState extends State<SignUp> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
@@ -22,6 +21,9 @@ class _SignUpState extends State<SignUp>
 
   SharedPreferences preferences;
   bool loading = false;
+
+  String gender;
+  String groupValue = "male";
 
   @override
   Widget build(BuildContext context) {
@@ -64,19 +66,26 @@ class _SignUpState extends State<SignUp>
                     Expanded(
                       child: Container(),
                     ),
-                    buildInputEntry(Icons.person, 'Full Name', validatePassword, _name),
+                    buildInputEntry(
+                        Icons.person, 'Full Name', validatePassword, _name),
+                    buildGenderSelector(),
                     buildInputEntry(Icons.email, 'Email', validateMail, _email),
-                    buildInputEntry(Icons.lock, 'Password', validatePassword, _password),
-                    buildInputEntry(Icons.lock, 'Confirm Password', validatePassword, _confirnpassword),
-                    buildLogButton('LogIn', (){}),
+                    buildInputEntry(
+                        Icons.lock, 'Password', validatePassword, _password),
+                    buildInputEntry(
+                        Icons.lock, 'Confirm Password', validatePassword,
+                        _confirnpassword),
+                    buildLogButton('Sign Up', () {}),
                     Divider(),
                     InkWell(
-                      onTap: (){
+                      onTap: () {
                         Navigator.pop(context);
                       },
                       child: RichText(
                         text: TextSpan(
-                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16.0),
+                            style: TextStyle(color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.0),
                             children: [
                               TextSpan(
                                   text: 'Do you have an account? click here to'
@@ -111,6 +120,43 @@ class _SignUpState extends State<SignUp>
     );
   }
 
+  Padding buildGenderSelector() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Material(
+        borderRadius: BorderRadius.circular(20.0),
+        color: Colors.white.withOpacity(0.5),
+        child: Container(
+          height: 50.0,
+          child: Row(
+                          children: <Widget>[
+                            Expanded(
+                                child: ListTile(
+                                    title: Text(
+                                      'male',
+                                      style: TextStyle(color: Colors.red),
+                                      textAlign: TextAlign.end,),
+                                    trailing: Radio(value: 'Male',
+                                        groupValue: groupValue,
+                                        activeColor: Colors.red,
+                                        onChanged: (e) => radioValueChanged(e)))),
+                            Expanded(
+                                child: ListTile(
+                                    title: Text(
+                                      'Female',
+                                      style: TextStyle(color: Colors.red),
+                                      textAlign: TextAlign.end,),
+                                    trailing: Radio(value: 'female',
+                                        groupValue: groupValue,
+                                        activeColor: Colors.red,
+                                        onChanged: (e) => radioValueChanged(e)))),
+                          ],
+                        ),
+        ),
+      ),
+    );
+  }
+
   Padding buildLogButton(String text, Function action) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -120,8 +166,14 @@ class _SignUpState extends State<SignUp>
         elevation: 0.0,
         child: MaterialButton(
           onPressed: action,
-          child: Text(text, textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0),),
-          minWidth: MediaQuery.of(context).size.width,
+          child: Text(text, textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0),),
+          minWidth: MediaQuery
+              .of(context)
+              .size
+              .width,
         ),
       ),
     );
@@ -170,5 +222,11 @@ class _SignUpState extends State<SignUp>
 
   bool validatePassword(String password) {
     return password.length > 6;
+  }
+
+  radioValueChanged(e) {
+    setState(() {
+      groupValue = e;
+    });
   }
 }
